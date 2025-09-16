@@ -16,7 +16,7 @@ export const goodsFromServer = [
 ];
 
 export const App = () => {
-  const [goods, setGoods] = useState(goodsFromServer);
+  const [goods, setGoods] = useState([...goodsFromServer]);
   const [sortType, setSortType] = useState('');
   const [isReversed, setIsReversed] = useState(false);
 
@@ -44,13 +44,13 @@ export const App = () => {
   };
 
   const handleReset = () => {
-    setGoods(goodsFromServer);
+    setGoods([...goodsFromServer]);
     setSortType('');
     setIsReversed(false);
   };
 
-  const isChanged =
-    sortType !== '' || isReversed || goods.join() !== goodsFromServer.join();
+  // Reset button should only be visible if current order != original order
+  const isChanged = JSON.stringify(goods) !== JSON.stringify(goodsFromServer);
 
   return (
     <div className="section content">
