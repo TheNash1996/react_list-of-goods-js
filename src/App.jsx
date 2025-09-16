@@ -21,15 +21,21 @@ export const App = () => {
   const [isReversed, setIsReversed] = useState(false);
 
   const handleSortByName = () => {
-    setGoods([...goods].sort((a, b) => a.localeCompare(b)));
+    let sorted = [...goodsFromServer].sort((a, b) => a.localeCompare(b));
+    if (isReversed) {
+      sorted = sorted.reverse();
+    }
+    setGoods(sorted);
     setSortType('name');
-    // do not reset isReversed here
   };
 
   const handleSortByLength = () => {
-    setGoods([...goods].sort((a, b) => a.length - b.length));
+    let sorted = [...goodsFromServer].sort((a, b) => a.length - b.length);
+    if (isReversed) {
+      sorted = sorted.reverse();
+    }
+    setGoods(sorted);
     setSortType('length');
-    // do not reset isReversed here
   };
 
   const handleReverse = () => {
